@@ -14,7 +14,7 @@
         });
       in rec {
         defaultPackage = packages.my-script;
-        packages.my-script = pkgs.symlinkJoin {
+        packages.mypassmenu = pkgs.symlinkJoin {
           name = my-name;
           paths = [ my-script ] ++ my-buildInputs;
           buildInputs = [ pkgs.makeWrapper ];
