@@ -13,7 +13,7 @@
           buildCommand = "${old.buildCommand}\n patchShebangs $out";
         });
       in rec {
-        defaultPackage = packages.my-script;
+        defaultPackage = packages.mypassmenu;
         packages.mypassmenu = pkgs.symlinkJoin {
           name = my-name;
           paths = [ my-script ] ++ my-buildInputs;
