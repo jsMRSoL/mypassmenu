@@ -9,10 +9,13 @@ if [[ $1 == "--type" ]]; then
 fi
 
 if [[ -n $WAYLAND_DISPLAY ]]; then
-	dmenu=wmenu
+	# dmenu=wmenu
+	dmenu=wofi
+	dmenu_args=("--insensitive" "--show=dmenu")
 	xdotool="ydotool type --file -"
 elif [[ -n $DISPLAY ]]; then
 	dmenu=dmenu
+	dmenu_args=("-i" "-l 42")
 	xdotool="xdotool type --clearmodifiers --file -"
 else
 	echo "Error: No Wayland or X11 display detected" >&2
@@ -24,7 +27,7 @@ password_files=("$prefix"/**/*.gpg)
 password_files=("${password_files[@]#"$prefix"/}")
 password_files=("${password_files[@]%.gpg}")
 
-password=$(printf '%s\n' "${password_files[@]}" | "$dmenu" -i -l 42 "$@")
+password=$(printf '%s\n' "${password_files[@]}" | "$dmenu" "${dmenu_args[@]}" "$@")
 
 [[ -n $password ]] || exit
 
